@@ -1,0 +1,51 @@
+---
+# This playbook contains plays for your local macbook.
+# src: http://blog.javabien.net/2014/03/03/setup-docker-on-osx-the-no-brainer-way/
+# Doesn't really work...
+
+- name: check for brew
+  command: brew help
+  register: result
+  ignore_errors: True
+
+- name: install brew if it doesn't exist
+  shell: ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  when: result|failed
+
+#- name: update brew if it does exist
+#  homebrew: update_homebrew=yes
+#  when: result|success
+
+- name: tap cask
+  homebrew_tap: tap=caskroom/cask state=present
+
+- name: install cask
+  homebrew: name=brew-cask
+
+- name: install virtualbox
+  homebrew_cask: name=virtualbox state=present
+
+- name: install boot2docker
+  homebrew: name=boot2docker state=present
+
+- command: boot2docker init
+
+- command: boot2docker up
+
+- name: store boot2docker_ip variable
+  command: boot2docker ip
+  register: boot2docker_ip
+
+- name: boot2docker needs hostname to line up for ssh purposes
+  lineinfile: "dest=/etc/hosts regexp='boot2docker' line='{{boot2docker_ip.stdout}} boot2docker' state=present"
+  become: yes
+  become_method: sudo
+
+
+
+#- name: make boot2docker start on system restart
+# copy .plist from brew
+# launchctl load ~/Library/LaunchAgents/com.docker.boot2docker.plist
+
+- name: install docker
+  homebrew: name=docker state=present

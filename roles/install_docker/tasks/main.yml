@@ -1,0 +1,17 @@
+---
+# Install docker
+
+- name: install docker with brew
+  hosts: all
+  include: install_brew.yml
+  when: ansible_distribution == 'MacOSX'
+
+- name: install docker with apt
+  hosts: all
+  include: install_apt.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: install docker with yum
+  hosts: all
+  include: install_yum.yml
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'

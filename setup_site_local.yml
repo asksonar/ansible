@@ -1,0 +1,26 @@
+---
+# This playbook deploys the whole application stack in this site.
+
+- name: install docker
+  hosts: all
+  become: yes
+  become_method: sudo
+
+  roles:
+    - install_docker
+
+- name: install dbservers
+  hosts: dbservers
+  become: yes
+  become_method: sudo
+
+  roles:
+    - docker_db
+
+- name: install webservers
+  hosts: webservers
+  become: yes
+  become_method: sudo
+
+  roles:
+    - docker_web

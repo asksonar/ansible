@@ -1,0 +1,21 @@
+---
+# pull down docker-db and start it
+
+- name: make sure log directory exists
+  file: path=/var/log/postgresql state=directory
+
+- name: make sure sql directory exists
+  file: path=/var/lib/postgresql state=directory
+
+- name: pull down and start docker-db
+  docker:
+    name: db
+    hostname: db
+    image: postgres:9.4.1 #asksonar/docker-db:latest
+    state: reloaded #asserts that all matching containers are running and restarts any that have any images or configuration out of date
+    pull: always #the registry will be checked for a newer version of the image' each time the task executes
+    volumes:
+    - /var/log/db:/var/log/postgresql
+    - /var/lib/db:/var/lib/postgresql
+    ports:
+    - "5432:5432"

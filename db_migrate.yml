@@ -1,0 +1,7 @@
+---
+# push db changes
+
+- hosts: webservers
+  tasks:
+  - name: rake db:migrate
+    shell: docker exec web /home/app/webapp/bin/rake db:migrate -f /home/app/webapp/Rakefile

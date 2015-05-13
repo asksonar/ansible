@@ -1,0 +1,6 @@
+---
+# install docker with yum
+# placeholder that doesn't do anything
+
+- name: install docker with yum
+  yum: name=docker state=present
