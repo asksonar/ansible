@@ -1,5 +1,18 @@
 ---
-# This playbook restarts the web server
+# This playbook ensures the db is started and restarts the web server
+
+- name: make sure VMs are runnings
+  hosts: localhost
+  tasks:
+  - shell: vagrant up
+
+- name: install dbservers
+  hosts: dbservers
+  become: yes
+  become_method: sudo
+
+  roles:
+    - docker_db
 
 - name: install webservers
   hosts: webservers
@@ -8,3 +21,11 @@
 
   roles:
     - docker_web
+
+- name: install videoservers
+  hosts: videoservers
+  become: yes
+  become_method: sudo
+
+  roles:
+    - docker_video

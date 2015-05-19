@@ -7,6 +7,12 @@
 - name: make sure sql directory exists
   file: path=/var/lib/postgresql state=directory
 
+# - name: destroy the previous db
+#   docker:
+#    name: db
+#    state: absent #stops and then removes any matching containers.
+#    image: postgres:9.4.1
+
 - name: pull down and start docker-db
   docker:
     name: db
@@ -15,7 +21,21 @@
     state: reloaded #asserts that all matching containers are running and restarts any that have any images or configuration out of date
     pull: always #the registry will be checked for a newer version of the image' each time the task executes
     volumes:
-    - /var/log/db:/var/log/postgresql
-    - /var/lib/db:/var/lib/postgresql
+    - /var/log/postgresql:/var/log/postgresql
+    - /var/lib/postgresql:/var/lib/postgresql
     ports:
     - "5432:5432"
+
+# - name: get the db ip address
+#   shell: >
+#     docker inspect db | grep \"IPAddress\": | cut -d '"' -f 4
+#   register: db_ip
+
+- name: get the db ip address from ifconfig
+  shell: >
+    ip addr list eth1 | grep "inet "|cut -d' ' -f6|cut -d/ -f1
+  register: db_ip
+
+- name: write the db ip address to db_host
+  set_fact:
+    db_host: "{{db_ip.stdout}}"

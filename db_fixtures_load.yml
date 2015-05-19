@@ -1,0 +1,7 @@
+---
+# push db changes
+
+- hosts: webservers
+  tasks:
+  - name: rake db:fixtures:load
+    shell: docker exec web /home/app/webapp/bin/rake db:fixtures:load -f /home/app/webapp/Rakefile

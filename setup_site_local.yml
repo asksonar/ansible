@@ -1,26 +1,19 @@
 ---
 # This playbook deploys the whole application stack in this site.
 
+- name: setup local machine
+  hosts: localhost
+
+  roles:
+  - local
+
 - name: install docker
-  hosts: all
+  hosts: remotehosts
   become: yes
   become_method: sudo
 
   roles:
-    - install_docker
+    - common
 
-- name: install dbservers
-  hosts: dbservers
-  become: yes
-  become_method: sudo
-
-  roles:
-    - docker_db
-
-- name: install webservers
-  hosts: webservers
-  become: yes
-  become_method: sudo
-
-  roles:
-    - docker_web
+- include: start_site_local.yml
+- include: db_migrate.yml

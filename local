@@ -1,8 +1,0 @@
-[webservers]
-dockerhost
-
-[dbservers]
-dockerhost
-
-[videoservers]
-dockerhost

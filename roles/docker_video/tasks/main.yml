@@ -1,0 +1,24 @@
+---
+# pull down docker-video and start it
+
+- name: destroy the previous video
+  docker:
+    name: video
+    state: absent #stops and then removes any matching containers.
+    image: asksonar/docker-video:latest
+
+- name: pull down and load docker-video
+  docker:
+    name: video
+    hostname: video
+    image: asksonar/docker-video:latest
+    state: restarted #unconditionally restarts (or starts) the matching containers
+    pull: always #the registry will be checked for a newer version of the image' each time the task executes
+    env:
+      DATABASE_URL: "postgres://postgres@{{db_host}}:5432/postgres"
+      SECRET_KEY_BASE: 8f2293dd66882bcf77ce3d37fd7bd5dfe7d50ec811883b638c0d931b2a667430309f9f81b446f38e22e62bd2faa74f321a1f5336dd1c9cc2c8e5de59f68d1efb
+    volumes:
+    - /var/src/video:/home/app/webapp
+    ports:
+    - "80:80"
+    - "443:443"
