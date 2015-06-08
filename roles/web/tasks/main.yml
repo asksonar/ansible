@@ -1,6 +1,15 @@
 ---
 # pull down docker-web and start it
 
+- name: add insecure registry
+  lineinfile: >
+    dest=/etc/default/docker regexp='DOCKER_OPTS' line='DOCKER_OPTS="--insecure-registry ec2-52-8-82-197.us-west-1.compute.amazonaws.com:5000"' state=present
+
+- name: restart docker
+# pending this fix - https://github.com/ansible/ansible-modules-core/issues/1170
+#  service: name=docker state=restarted
+  shell: service docker restart
+
 - name: destroy the previous web
   docker:
     name: web
@@ -11,10 +20,12 @@
   docker:
     name: web
     hostname: web
+    registry: ec2-52-8-82-197.us-west-1.compute.amazonaws.com:5000
+    insecure_registry: true
     image: ec2-52-8-82-197.us-west-1.compute.amazonaws.com:5000/web:latest
     state: restarted #unconditionally restarts (or starts) the matching containers
     pull: always #the registry will be checked for a newer version of the image' each time the task executes
     ports:
     - "80:80"
     - "443:443"
-    command: /sinb/my_init -- sh -c '/etc/my_startup/start_unicorn.sh'
+    command: /sbin/my_init -- sh -c '/etc/my_startup/start_unicorn.sh'

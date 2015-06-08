@@ -1,8 +1,8 @@
 [webservers]
 #web1
-ec2-52-8-126-255.us-west-1.compute.amazonaws.com
-#web2
-ec2-52-8-53-101.us-west-1.compute.amazonaws.com
+ec2-52-8-126-255.us-west-1.compute.amazonaws.com ansible_ssh_user=ubuntu
+#web3
+ec2-52-8-148-200.us-west-1.compute.amazonaws.com ansible_ssh_user=ubuntu
 
 [webservers:vars]
 
