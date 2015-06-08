@@ -1,0 +1,9 @@
+---
+# This playbook deploys only the web box
+
+- name: setup web box
+  hosts: webservers
+
+  roles:
+  - common
+  - web

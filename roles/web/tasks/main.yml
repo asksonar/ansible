@@ -5,20 +5,16 @@
   docker:
     name: web
     state: absent #stops and then removes any matching containers.
-    image: asksonar/docker-web:latest
+    image: ec2-52-8-82-197.us-west-1.compute.amazonaws.com:5000/web:latest
 
 - name: pull down and load docker-web
   docker:
     name: web
     hostname: web
-    image: asksonar/docker-web:latest
+    image: ec2-52-8-82-197.us-west-1.compute.amazonaws.com:5000/web:latest
     state: restarted #unconditionally restarts (or starts) the matching containers
     pull: always #the registry will be checked for a newer version of the image' each time the task executes
-    env:
-      DATABASE_URL: "postgres://postgres@{{db_host}}:5432/postgres"
-      SECRET_KEY_BASE: bd75f41c7a4684b94f4ef0cafceb0966293a5b43c2dcf3bed76bbe085c0ec0ea58392ecfdd72f341ef3ea558d8fe3b86bd61bb15955302c675acc8b5fa073823
-    volumes:
-    - /var/src/web:/home/app/webapp
     ports:
     - "80:80"
     - "443:443"
+    command: /sinb/my_init -- sh -c '/etc/my_startup/start_unicorn.sh'

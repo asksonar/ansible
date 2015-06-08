@@ -6,12 +6,6 @@
 - name: make sure sonar directory exists
   file: path=~/sonar state=directory
 
-- name: make sure log/postgresql directory exists
-  file: path=~/log/postgresql state=directory
-
-- name: make sure lib/postgresql directory exists
-  file: path=~/lib/postgresql state=directory
-
 # git pull all the repos into ~/sonar
 
 # install virtualbox

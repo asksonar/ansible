@@ -1,8 +1,10 @@
 [webservers]
-ec2-52-8-55-13.us-west-1.compute.amazonaws.com
+#web1
+ec2-52-8-126-255.us-west-1.compute.amazonaws.com
+#web2
+ec2-52-8-53-101.us-west-1.compute.amazonaws.com
 
 [webservers:vars]
-db_host=sonar.ceogf0soa8au.us-west-1.rds.amazonaws.com
 
 [dbservers]
 # no dbservers to configure since we are using RDS
