@@ -26,6 +26,8 @@
   - web
 
   post_tasks:
+  - name: wait for docker to start up
+    pause: minutes=1
   - name: Instance Register
     become: no
     local_action:
