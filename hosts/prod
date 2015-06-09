@@ -1,0 +1,5 @@
+[webservers]
+#prod.web1
+ec2-52-8-200-98.us-west-1.compute.amazonaws.com ansible_ssh_user=ubuntu
+#prod.web2
+ec2-52-8-151-158.us-west-1.compute.amazonaws.com ansible_ssh_user=ubuntu
