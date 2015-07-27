@@ -28,4 +28,6 @@
     ports:
     - "80:80"
     - "443:443"
-    command: /sbin/my_init -- sh -c '/etc/my_startup/start_unicorn.sh'
+    volumes:
+    - /var/log
+    command: /sbin/my_init -- sh -c '/etc/my_startup/start_thin.sh'
