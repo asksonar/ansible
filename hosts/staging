@@ -9,4 +9,6 @@ ec2-52-8-148-200.us-west-1.compute.amazonaws.com ansible_ssh_user=ubuntu
 [dbservers]
 # no dbservers to configure since we are using RDS
 
-[videoservers]
+[workers_videoservers]
+#staging.video1
+ec2-52-8-72-115.us-west-1.compute.amazonaws.com

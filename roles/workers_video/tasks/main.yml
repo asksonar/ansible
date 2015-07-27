@@ -1,0 +1,33 @@
+---
+# pull down docker-web and start it
+
+- name: add insecure registry
+  lineinfile: >
+    dest=/etc/default/docker regexp='DOCKER_OPTS' line='DOCKER_OPTS="--insecure-registry jenkins.engsonar.com:5000"' state=present
+
+- name: restart docker
+# pending this fix - https://github.com/ansible/ansible-modules-core/issues/1170
+#  service: name=docker state=restarted
+  shell: service docker restart
+
+- name: destroy the previous workers_video
+  docker:
+    name: workers_video
+    state: absent #stops and then removes any matching containers.
+    image: jenkins.engsonar.com:5000/workers_video:latest
+
+- name: pull down and load docker workers_video
+  docker:
+    name: workers_video
+    hostname: workers_video
+    registry: jenkins.engsonar.com:5000
+    insecure_registry: true
+    image: jenkins.engsonar.com:5000/workers_video:latest
+    state: restarted #unconditionally restarts (or starts) the matching containers
+    pull: always #the registry will be checked for a newer version of the image' each time the task executes
+    ports:
+    - "80:80"
+    - "443:443"
+    volumes:
+    - /var/log
+    command: /sbin/my_init -- sh -c '/etc/my_startup/start_rescue.sh'

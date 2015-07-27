@@ -1,0 +1,12 @@
+---
+# This playbook deploys all the workers_video boxes at once
+# TODO: check out the redis queue
+
+- name: setup workers_video boxes
+  hosts: workers_videoservers
+  become: yes
+  become_method: sudo
+
+  roles:
+  - common
+  - workers_video
