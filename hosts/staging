@@ -11,4 +11,4 @@ ec2-52-8-148-200.us-west-1.compute.amazonaws.com ansible_ssh_user=ubuntu
 
 [workers_videoservers]
 #staging.video1
-ec2-52-8-72-115.us-west-1.compute.amazonaws.com
+ec2-52-8-72-115.us-west-1.compute.amazonaws.com ansible_ssh_user=ubuntu
