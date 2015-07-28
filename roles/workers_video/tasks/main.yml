@@ -30,4 +30,4 @@
     - "443:443"
     volumes:
     - /var/log
-    command: /sbin/my_init -- sh -c '/etc/my_startup/start_rescue.sh'
+    command: /sbin/my_init -- sh -c '/etc/my_startup/start_resque.sh'
