@@ -34,5 +34,5 @@
       region: us-west-1
       ec2_elbs: "{{ item }}"
       state: 'present'
-      wait_timeout: 150 # 60 seconds initial wait + 30 seconds between checks = at least 4 checks
+      wait_timeout: 180 # 60 seconds initial wait + 30 seconds between checks = at least 4 checks
     with_items: ec2_elbs
