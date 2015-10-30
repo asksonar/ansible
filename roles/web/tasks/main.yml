@@ -33,7 +33,7 @@
     env:
       RACK_ENV: production
       RAILS_ENV: production
-      SECRET_KEY_BASE: {{ secret_key_base }}
-      DATABASE_URL: {{ database_url }}
-      RAILS_RESQUE_REDIS: {{ rails_resque_redis }}
+      SECRET_KEY_BASE: "{{ secret_key_base }}"
+      DATABASE_URL: "{{ database_url }}"
+      RAILS_RESQUE_REDIS: "{{ rails_resque_redis }}"
     command: /sbin/my_init -- sh -c '/etc/my_startup/start_thin.sh'
