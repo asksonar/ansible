@@ -5,6 +5,9 @@ ec2-52-8-126-255.us-west-1.compute.amazonaws.com ansible_ssh_user=ubuntu
 ec2-52-8-148-200.us-west-1.compute.amazonaws.com ansible_ssh_user=ubuntu
 
 [webservers:vars]
+secret_key_base=d23763f05669fdac7025e9a0faa7ccd71a84f2611cc002ebc015ac1636daa73cbc4309d9e670aef8bebbf36fc45957bce6d3ae1dcfbf26cbcbd0cd546dac4e9b
+database_url=postgres://dbadmin:vUM9bCvS4xNgr9M@staging-replica.ceogf0soa8au.us-west-1.rds.amazonaws.com:5432/dbadmin
+rails_resque_redis=redis://staging-resque.ugcccs.ng.0001.usw1.cache.amazonaws.com:6379/0
 
 [dbservers]
 # no dbservers to configure since we are using RDS
