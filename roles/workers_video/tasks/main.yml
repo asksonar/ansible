@@ -33,6 +33,7 @@
     env:
       RACK_ENV: production
       RAILS_ENV: production
+      SONAR_ENV: "{{ sonar_env }}"
       SECRET_KEY_BASE: "{{ secret_key_base }}"
       DATABASE_URL: "{{ database_url }}"
       RAILS_RESQUE_REDIS: "{{ rails_resque_redis }}"
