@@ -38,4 +38,4 @@
   pip: name=docker-py version=1.1.0
 
 - name: update time
-  shell: ntpdate time.nist.gov
+  shell: ntpdate ntp.ubuntu.com
