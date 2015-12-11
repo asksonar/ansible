@@ -10,6 +10,15 @@
 #  service: name=docker state=restarted
   shell: service docker restart
 
+- name: add papertrail forwarding via logspout
+  docker:
+    name: logspout
+    hostname: {{ ansible_hostname }}
+    image: gliderlabs/logspout
+    volumes:
+    - /var/run/docker.sock:/tmp/docker.sock
+    command: syslog://logs3.papertrailapp.com:19980
+
 - name: destroy the previous web
   docker:
     name: web
