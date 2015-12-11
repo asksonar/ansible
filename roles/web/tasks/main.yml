@@ -13,7 +13,7 @@
 - name: add papertrail forwarding via logspout
   docker:
     name: logspout
-    hostname: {{ ansible_hostname }}
+    hostname: "{{ ansible_hostname }}"
     image: gliderlabs/logspout
     volumes:
     - /var/run/docker.sock:/tmp/docker.sock
