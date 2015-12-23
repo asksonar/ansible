@@ -4,7 +4,15 @@ ec2-52-8-200-98.us-west-1.compute.amazonaws.com ansible_ssh_user=ubuntu
 #prod.web2
 ec2-52-8-151-158.us-west-1.compute.amazonaws.com ansible_ssh_user=ubuntu
 
-[webservers:vars]
+[utilserver]
+#prod.util1
+ec2-52-53-255-160.us-west-1.compute.amazonaws.com ansible_ssh_user=ubuntu
+
+[web-like_servers:children]
+webservers
+utilserver
+
+[web-like_servers:vars]
 sonar_env=production
 secret_key_base=b12e527df727aa2de82b08aec149d24577443af0302a32d0261df305f47665fc09c11760cb0aa461af44f97a83663c4bc195788e5ba033c65f1bdd15b6e29ac5
 database_url=postgres://dbadmin:vUM9bCvS4xNgr9M@sonar.ceogf0soa8au.us-west-1.rds.amazonaws.com:5432/dbadmin
@@ -19,7 +27,3 @@ sonar_env=production
 secret_key_base=ea58bb74a8fff32824e35da2c705d489140881062fbdb52435d8476fe69efecd2af689def031f7a197965eefe0331ce1894856b6405c2765d83591497f678e18
 database_url=postgres://dbadmin:vUM9bCvS4xNgr9M@sonar.ceogf0soa8au.us-west-1.rds.amazonaws.com:5432/dbadmin
 rails_resque_redis=redis://prod-resque.ugcccs.ng.0001.usw1.cache.amazonaws.com:6379/0
-
-[utilserver]
-#prod.util1
-ec2-52-53-255-160.us-west-1.compute.amazonaws.com ansible_ssh_user=ubuntu
