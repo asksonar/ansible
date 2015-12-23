@@ -3,6 +3,16 @@
 # Pulls them out of load balancer before
 # and puts them back afterwards
 
+- name: run migration
+  hosts: utilserver
+  become: yes
+  become_method: sudo
+
+  roles:
+  - common
+  - web
+  - migrate
+
 - name: setup web box
   hosts: webservers
   serial: 1

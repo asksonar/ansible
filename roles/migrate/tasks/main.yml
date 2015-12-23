@@ -1,0 +1,5 @@
+--
+# run migrate task
+
+- name: migrate
+  shell: docker exec web bundle exec rake db:migrate

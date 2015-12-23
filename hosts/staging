@@ -22,3 +22,7 @@ sonar_env=staging
 secret_key_base=b12e527df727aa2de82b08aec149d24577443af0302a32d0261df305f47665fc09c11760cb0aa461af44f97a83663c4bc195788e5ba033c65f1bdd15b6e29ac5
 database_url=postgres://dbadmin:vUM9bCvS4xNgr9M@staging-replica.ceogf0soa8au.us-west-1.rds.amazonaws.com:5432/dbadmin
 rails_resque_redis=redis://staging-resque.ugcccs.ng.0001.usw1.cache.amazonaws.com:6379/0
+
+[utilserver]
+#staging.util1
+ec2-54-215-215-65.us-west-1.compute.amazonaws.com ansible_ssh_user=ubuntu
