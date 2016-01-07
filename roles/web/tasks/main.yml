@@ -25,6 +25,9 @@
     state: absent #stops and then removes any matching containers.
     image: jenkins.engsonar.com:5000/web:latest
 
+- name: remove old docker images
+  shell: docker rmi $(docker images -qf "dangling=true")
+
 - name: pull down and load docker-web
   docker:
     name: web
