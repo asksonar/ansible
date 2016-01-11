@@ -25,8 +25,18 @@
     state: absent #stops and then removes any matching containers.
     image: jenkins.engsonar.com:5000/web:latest
 
+# broken up version of command
+# docker rmi $(docker images -qf "dangling=true")
+- name: get list of old docker images
+  shell: docker images -qf "dangling=true"
+  register: dangling_images
+
+# performs no action if previous command generates no lines
+# will fail if image is in use by container
+# manually cleaning up such cases is preferred to telling ansible to ignore_errors
 - name: remove old docker images
-  shell: docker rmi $(docker images -qf "dangling=true")
+  shell: docker rmi {{item}}
+  with_items: dangling_images.stdout_lines
 
 - name: pull down and load docker-web
   docker:

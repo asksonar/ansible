@@ -1,0 +1,11 @@
+---
+# This playbook is useful for testing one-off commands against real servers
+# ansible-playbook -i hosts/staging test_workers.yml -vv
+
+- hosts: workers_videoservers
+  become: yes
+  become_method: sudo
+
+  tasks:
+  - name: now testing commands on all workers
+    shell: echo "now testing commands"
