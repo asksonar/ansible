@@ -1,0 +1,11 @@
+---
+# This playbook deploys the internal boxes at once
+
+- name: setup internal boxes
+  hosts: internalservers
+  become: yes
+  become_method: sudo
+
+  roles:
+  - common
+  - internal
