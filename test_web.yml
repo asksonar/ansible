@@ -1,0 +1,11 @@
+---
+# This playbook is useful for testing one-off commands against real servers
+# ansible-playbook -i hosts/staging test_web.yml -vv
+
+- hosts: webservers
+  become: yes
+  become_method: sudo
+
+  tasks:
+  - name: now testing commands on all webservers
+    shell: echo "now testing commands"
