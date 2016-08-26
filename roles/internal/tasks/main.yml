@@ -1,0 +1,42 @@
+---
+# pull down docker-internal and start it
+
+- name: add insecure registry
+  lineinfile: >
+    dest=/etc/default/docker regexp='DOCKER_OPTS' line='DOCKER_OPTS="--insecure-registry jenkins.engsonar.com:5000"' state=present
+
+- name: restart docker
+# pending this fix - https://github.com/ansible/ansible-modules-core/issues/1170
+#  service: name=docker state=restarted
+  shell: service docker restart
+
+- name: destroy the previous internal
+  docker:
+    name: internal
+    state: absent #stops and then removes any matching containers.
+    image: jenkins.engsonar.com:5000/internal:latest
+
+- name: remove old docker images
+  shell: docker rmi $(docker images -qf "dangling=true")
+
+- name: pull down and load docker-internal
+  docker:
+    name: internal
+    hostname: internal
+    registry: jenkins.engsonar.com:5000
+    insecure_registry: true
+    image: jenkins.engsonar.com:5000/internal:latest
+    state: restarted #unconditionally restarts (or starts) the matching containers
+    pull: always #the registry will be checked for a newer version of the image' each time the task executes
+    ports:
+    - "80:80"
+    - "443:443"
+    volumes:
+    - /var/log
+    env:
+      RACK_ENV: production
+      RAILS_ENV: production
+      SONAR_ENV: "{{ sonar_env }}"
+      SECRET_KEY_BASE: "{{ secret_key_base }}"
+      DATABASE_URL: "{{ database_url }}"
+    command: /sbin/my_init -- sh -c '/etc/my_startup/start_thin.sh'
