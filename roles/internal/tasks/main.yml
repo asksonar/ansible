@@ -38,5 +38,6 @@
       RAILS_ENV: production
       SONAR_ENV: "{{ sonar_env }}"
       SECRET_KEY_BASE: "{{ secret_key_base }}"
+      AIRSONAR_API_KEY: "{{ airsonar_api_key }}"
       DATABASE_URL: "{{ database_url }}"
     command: /sbin/my_init -- sh -c '/etc/my_startup/start_thin.sh'

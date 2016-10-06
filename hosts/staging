@@ -15,6 +15,7 @@ utilserver
 [web-like_servers:vars]
 sonar_env=staging
 secret_key_base=d23763f05669fdac7025e9a0faa7ccd71a84f2611cc002ebc015ac1636daa73cbc4309d9e670aef8bebbf36fc45957bce6d3ae1dcfbf26cbcbd0cd546dac4e9b
+airsonar_api_key=token LETMEIN
 database_url=postgres://dbadmin:vUM9bCvS4xNgr9M@staging-replica.ceogf0soa8au.us-west-1.rds.amazonaws.com:5432/dbadmin
 rails_resque_redis=redis://staging-resque.ugcccs.ng.0001.usw1.cache.amazonaws.com:6379/0
 
@@ -37,5 +38,6 @@ ec2-54-193-94-108.us-west-1.compute.amazonaws.com ansible_ssh_user=ubuntu
 
 [internalservers:vars]
 sonar_env=staging
-secret_key_base=9b8e9f1cb52432f0991d3af5d8042589206606affde108f778d6cceb02a82c85295f05d1cefb64eb3245fd97b205301187afe8affea7da9817156e1dd35f61e5
+secret_key_base=2125a27d38d3284930debce1181f6e207696724d7dedacbe5df0d7b4ae4fee59aa09e8a5635e6e2cc6a0170b32b84e2f582fff2e2541d699dd1a985b00dfa79a
+airsonar_api_key=token LETMEIN
 database_url=postgres://dbadmin:vUM9bCvS4xNgr9M@internal-staging.ceogf0soa8au.us-west-1.rds.amazonaws.com:5432/dbadmin

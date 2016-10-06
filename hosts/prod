@@ -15,6 +15,7 @@ utilserver
 [web-like_servers:vars]
 sonar_env=production
 secret_key_base=b12e527df727aa2de82b08aec149d24577443af0302a32d0261df305f47665fc09c11760cb0aa461af44f97a83663c4bc195788e5ba033c65f1bdd15b6e29ac5
+airsonar_api_key=token LETMEIN
 database_url=postgres://dbadmin:vUM9bCvS4xNgr9M@sonar.ceogf0soa8au.us-west-1.rds.amazonaws.com:5432/dbadmin
 rails_resque_redis=redis://prod-resque.ugcccs.ng.0001.usw1.cache.amazonaws.com:6379/0
 
